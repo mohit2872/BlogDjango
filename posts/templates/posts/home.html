@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Home Page</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- link for jquery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <!-- link for bootstrap.js -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <style>
+    img{
+
+    }
+    .custom{
+      max-height: 250px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mynav" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="#">Mohit's Blog</a>
+      </div>
+      <div class="collapse navbar-collapse" id="mynav">
+         <ul class="nav navbar-nav">
+           <li class="active"><a href="#">About <span class="sr-only">(current)</span></a></li>
+           <li><a href="#">Twitter</a></li>
+         </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <h1 class="text-center">Welcome to Mohit's Blog.</h1>
+    {% load static %}
+    <img src="{% static 'posts/home.jpg' %}" class ="img-responsive center-block custom" alt="Home Photo">
+    <h2>Latest Posts</h2> {% for post in posts.all %}
+    <a href="{% url 'post_detail' post.id %}"><h3>{{post.title}}</h3></a>
+    <h4><span class="glyphicon glyphicon-time"></span> {{post.pub_date_pretty}}</h4>
+    <br>
+    <img src="{{post.image.url}}" alt="" class="img-responsive center-block custom">
+    <br>
+    <p>{{post.summary}}</p>
+    <hr>
+    <br> {% endfor %}
+  </div>
+</body>
+
+</html>
